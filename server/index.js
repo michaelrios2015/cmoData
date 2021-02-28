@@ -9,12 +9,12 @@ const fastcsv = require("fast-csv");
   let csvStream = fastcsv
   .parse()
   .on("data", function(data) {
-    console.log('here')
+    // console.log('here')
     csvData.push(data);
   })
   .on("end", async function() {
     for (let i = 0; i < csvData.length; i++ ){
-      console.log(csvData[i][1]);
+      // console.log(csvData[i][1]);
       await CMOS.create({ group: csvData[i][0], deal: csvData[i][1], cpr: csvData[i][2], cprNext: csvData[i][3], vpr: csvData[i][4], vprNext: csvData[i][5], 
         cdr: csvData[i][6], cdrNext: csvData[i][7], currFace: csvData[i][8], WAM: csvData[i][9] })
     }
