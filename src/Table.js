@@ -103,13 +103,13 @@ render(){
                         <tr>
                             <th>Deal</th>
                             <th>Group</th>
-                            <th>CPR</th>
-                            <th>CPR Next</th>
-                            <th>VPR</th>
-                            <th>VPR Next</th>
-                            <th>CDR</th>
-                            <th>CDR Next</th>
-                            <th>CurrFace</th>
+                            <th>Feb CPR</th>
+                            <th>March CPR</th>
+                            <th>Feb VPR</th>
+                            <th>March VPR</th>
+                            <th>Feb CDR</th>
+                            <th>March CDR</th>
+                            <th>Current Face</th>
                         </tr>   
                     </thead>
                 <tbody>
