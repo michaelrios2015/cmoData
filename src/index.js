@@ -14,6 +14,8 @@ class _App extends Component{
 
   componentDidMount(){
     // this.props.bootstrap();
+    // maybe in here i can get the arrays for group and other thing
+    //and put them in store??
   }
 
   //this works fine now need to figure out how to put my data into Material UI table and add search

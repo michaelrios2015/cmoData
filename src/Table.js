@@ -6,6 +6,12 @@ import { loadData, loadDataByGroup } from './store';
 //should there be three calls one that gets 100 items per page and keeps going one for each search of a cusip and poolname
 //probably  
 
+function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+
 class Table extends Component{
         constructor(){
           super();
@@ -22,6 +28,8 @@ class Table extends Component{
           // console.log(this.props)
        
         }
+        //this lets me do a call with where and not end up in an
+        // infinite loop
         // componentDidUpdate(prevProps, prevState){
             
         //     if (prevState.searchA !== this.state.searchA){
@@ -142,7 +150,7 @@ render(){
                                         { item.cdrNext }    
                                     </td>
                                     <td key={ item.id + 9}>
-                                        { item.currFace }    
+                                        { numberWithCommas(item.currFace) }    
                                     </td>
                                 </tr>
                                 );
