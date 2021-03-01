@@ -15,12 +15,32 @@ app.use('/dist', static(path.join(__dirname, '..', '..', 'dist')));
 // is this supposed to be here??
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, '..', '..', 'index.html')));
 
-//gets all schools
+//gets all cmos
 app.get('/api/cmos', async(req, res, next)=> {
   try {
     res.send(await CMOS.findAll());
   }
   catch(ex){
+    next(ex);
+  }
+});
+
+//gets cmos by group
+app.get('/api/group/:group', async(req, res, next)=> {
+  try {
+    if (req.params.group !== 'All'){
+    console.log('-------------------------------')
+    console.log(req.params.group)
+    res.send(await CMOS.findAll({where: {group: req.params.group}}));
+    // res.send(await CMOS.findAll());
+    } else{
+      console.log('-------------------------------')
+      console.log(req.params.group)
+      res.send(await CMOS.findAll());
+    }
+  }
+  catch(ex){
+    console.log('-------------------------------')
     next(ex);
   }
 });

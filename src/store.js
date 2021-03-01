@@ -36,10 +36,23 @@ const _loadData = (data) =>{
 
 const loadData = () =>{
     return async(dispatch)=>{
+        // console.log('---------------in loadDataByGroup dispath ----------');
         const data = (await axios.get('/api/cmos')).data;
+        // console.log(data);
+        dispatch(_loadData(data));
+    }
+};
+
+const loadDataByGroup = (group) =>{
+    console.log(`/api/group/${group}`);
+
+    return async(dispatch)=>{
+        console.log('---------------in loadDataByGroup dispath ----------');
+        const data = (await axios.get(`/api/group/${group}`)).data;
+        console.log(data);
         dispatch(_loadData(data));
     }
 };
 
 export default store;
-export { loadData };
+export { loadData, loadDataByGroup };
