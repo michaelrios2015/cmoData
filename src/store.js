@@ -43,16 +43,15 @@ const loadData = () =>{
     }
 };
 
-const loadDataByGroup = (group) =>{
-    console.log(`/api/group/${group}`);
-
+const loadDataByDealandGroup = (deal, group) =>{
+    
     return async(dispatch)=>{
         console.log('---------------in loadDataByGroup dispath ----------');
-        const data = (await axios.get(`/api/group/${group}`)).data;
+        const data = (await axios.get(`/api/dealandgroup/${deal}/${group}`)).data;
         console.log(data);
         dispatch(_loadData(data));
     }
 };
 
 export default store;
-export { loadData, loadDataByGroup };
+export { loadData, loadDataByDealandGroup };

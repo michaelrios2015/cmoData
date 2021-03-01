@@ -26,13 +26,23 @@ app.get('/api/cmos', async(req, res, next)=> {
 });
 
 //gets cmos by group
-app.get('/api/group/:group', async(req, res, next)=> {
+app.get('/api/dealandgroup/:deal/:group', async(req, res, next)=> {
   try {
-    if (req.params.group !== 'All'){
-    console.log('-------------------------------')
-    console.log(req.params.group)
-    res.send(await CMOS.findAll({where: {group: req.params.group}}));
-    // res.send(await CMOS.findAll());
+    if (req.params.deal !== 'All' && req.params.group !== 'All'){
+      console.log('-------------------------------')
+      console.log(req.params.deal);
+      console.log(req.params.group); 
+      res.send(await CMOS.findAll({where: {deal: req.params.deal, group: req.params.group}}));
+    } else if ( req.params.deal !== 'All'){
+      console.log('-------------------------------')
+      console.log(req.params.deal);
+      console.log(req.params.group); 
+      res.send(await CMOS.findAll({where: {deal: req.params.deal}}));
+    } else if ( req.params.group !== 'All'){
+      console.log('-------------------------------')
+      console.log(req.params.deal);
+      console.log(req.params.group); 
+      res.send(await CMOS.findAll({where: {group: req.params.group}}));
     } else{
       console.log('-------------------------------')
       console.log(req.params.group)

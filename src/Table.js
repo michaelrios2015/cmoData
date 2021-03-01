@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadData, loadDataByGroup } from './store';
+import { loadData, loadDataByDealandGroup } from './store';
 
-//pagination would really help this simple front end is easy but not not be helpful since we are trying to speed it up
-//should there be three calls one that gets 100 items per page and keeps going one for each search of a cusip and poolname
-//probably  
+// so now my filtering does new call to the database, which may or may not actually help things
+//but should make it so I can use the material UI stuff easier
+
+// still think pagination would be helpful but would need to change how we get the deals and groups to search through 
+// so not going to worry about now
 
 function numberWithCommas(x) {
     var parts = x.toString().split(".");
@@ -20,7 +22,6 @@ class Table extends Component{
             searchB: 'All', 
           };
           this.onChange = this.onChange.bind(this);
-          this.reloadA = this.reloadA.bind(this);
         }
       
         componentDidMount(){
@@ -28,16 +29,15 @@ class Table extends Component{
           // console.log(this.props)
        
         }
-        //this lets me do a call with where and not end up in an
-        // infinite loop
-        // componentDidUpdate(prevProps, prevState){
+        // this lets me do a call with where and not end up in an infinite loop
+        componentDidUpdate(_, prevState){
             
-        //     if (prevState.searchA !== this.state.searchA){
-        //         console.log(prevState.searchA);
-        //         console.log(this.state.searchA);
-        //         this.reloadA()
-        //     }
-        // }
+            if (prevState.searchA !== this.state.searchA || prevState.searchB !== this.state.searchB ){
+                this.props.loadDataByDealandGroup(this.state.searchA, this.state.searchB);
+                // console.log(this.state.searchA);
+                // console.log(this.state.searchB);
+            }
+        }
       
         onChange(ev){
           const change = {};
@@ -45,11 +45,6 @@ class Table extends Component{
           change[ev.target.name] = ev.target.value;
           this.setState(change);
         }
-
-        reloadA(){
-            this.props.loadDataByGroup(this.state.searchA);
-        }
-
 
 render(){
     let { data } = this.props;
@@ -68,13 +63,6 @@ render(){
     
     const { onChange } = this;
     const { searchA, searchB } = this.state;
-    
-    if( searchA !== 'All'){
-        data = data.filter((item)=> item.deal === searchA);
-    }
-    if( searchB !== 'All'){
-      data = data.filter((item)=> item.group === searchB);
-    }
 
     return(
         <div className = { 'myTable' }>
@@ -82,7 +70,7 @@ render(){
           it would somehow have to combine a input box with a select box, I think and filter through options as you type */}
             Deal Name:
                 <select name='searchA' value={ searchA } onChange = { onChange }>
-                        <option value = 'All'>Choose a Deal Name</option>
+                        <option value = 'All'>All Deal Names</option>
                         {
                             dealNames.map( (dealName, idx) => { 
                                     return (
@@ -95,7 +83,7 @@ render(){
                 </select>   
             Groups:
                 <select name='searchB' value={ searchB } onChange = { onChange }>
-                        <option value = 'All'>Choose a Group</option>
+                        <option value = 'All'>All Groups</option>
                         {
                             groups.map( (group, idx) => { 
                                     return (
@@ -172,8 +160,8 @@ const mapDispatchToProps = (dispatch) => {
       bootstrap: ()=> {
         dispatch(loadData());
       },
-      loadDataByGroup: (group)=> {
-        dispatch(loadDataByGroup(group));
+      loadDataByDealandGroup: (deal, group)=> {
+        dispatch(loadDataByDealandGroup(deal, group));
       }
     };
   }
