@@ -27,8 +27,6 @@ const fastcsv = require("fast-csv");
 
   };
 
-  
-
 
 const init = async()=> {
     try {
