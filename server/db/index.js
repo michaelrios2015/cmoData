@@ -32,10 +32,47 @@ const CMOS = db.define('cmo', {
   }     
 },{ timestamps: false });
 
+const CMOSTwo = db.define('cmotwo', {
+  deal: { 
+    type: STRING, 
+  },
+  group: { 
+    type: STRING, 
+  },
+  actualFebCpr: { 
+    type: FLOAT, 
+  },
+  actualFebResidual: { 
+    type: FLOAT, 
+  },
+  cpr: { 
+    type: FLOAT, 
+  },
+  cprNext: { 
+    type: FLOAT, 
+  },
+  vpr: { 
+    type: FLOAT, 
+  }, 
+  vprNext: { 
+    type: FLOAT, 
+  },
+  cdr: { 
+    type: FLOAT, 
+  },
+  cdrNext: { 
+    type: FLOAT, 
+  },
+  currFace: { 
+    type: FLOAT, 
+  }     
+},{ timestamps: false });
+
 module.exports = {
     // Include your models in this exports object as well!
     db,
     models: {
-      CMOS
+      CMOS,
+      CMOSTwo
     }
   }

@@ -99,13 +99,12 @@ render(){
                         <tr>
                             <th>Deal</th>
                             <th>Group</th>
-                            <th>Feb CPR</th>
                             <th>March CPR</th>
-                            <th>Feb VPR</th>
+                            <th>April CPR</th>
                             <th>March VPR</th>
-                            <th>Feb CDR</th>
+                            <th>April VPR</th>
                             <th>March CDR</th>
-                            <th>Current Face</th>
+                            <th>April CDR</th>
                         </tr>   
                     </thead>
                 <tbody>
@@ -136,9 +135,6 @@ render(){
                                     </td>
                                     <td key={ item.id + 8}>
                                         { item.cdrNext }    
-                                    </td>
-                                    <td key={ item.id + 9}>
-                                        { numberWithCommas(item.currFace) }    
                                     </td>
                                 </tr>
                                 );
